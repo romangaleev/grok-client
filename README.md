@@ -8,3 +8,6 @@ Setup
 ```
 $ cpanm Web::Scraper
 ```
+TODO
+====
+Kerberos, multi-page
