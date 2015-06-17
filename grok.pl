@@ -17,7 +17,9 @@ BEGIN {
 
 my ($term) = @ARGV;
 if(not defined $term) {
-	print "Usage: HTTPS_CA_FILE=gooddata.pem USER=username PASSWORD=password $0 search_term\n";
+	print "Usage: $0 search_term\n";
+	print " or  : HTTPS_CA_FILE=gooddata.pem $0 search_term\n";
+	print " or  : HTTPS_CA_FILE=gooddata.pem USER=username PASSWORD=password $0 search_term\n";
 	exit;
 }
 
