@@ -11,9 +11,12 @@ use strict;
 use Web::Scraper;
 use JSON;
 
+BEGIN {
+	$ENV{HTTPS_CA_FILE} ||= "gooddata.pem";
+};
 
 my ($term) = @ARGV;
-if(not defined $term or not defined $ENV{USER} or not defined $ENV{PASSWORD}) {
+if(not defined $term) {
 	print "Usage: HTTPS_CA_FILE=gooddata.pem USER=username PASSWORD=password $0 search_term\n";
 	exit;
 }
@@ -39,7 +42,7 @@ my @projects = map { sprintf("project=%s", $_) } @{ $repo->{opt} };
 
 my $q = sprintf("q=\"%s\"", $term);
 
-my $query = join('&', $q, @projects);
+my $query = join('&', "n=1024", $q, @projects);
 
 my $result = $ua->get( join('?', $search, $query) );
 

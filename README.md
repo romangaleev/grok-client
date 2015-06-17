@@ -8,6 +8,7 @@ Setup
 ```
 $ cpanm Web::Scraper
 ```
-TODO
-====
-Kerberos, multi-page
+To use Kerberos authentication just do:
+```
+$ cpanm LWP::Authen::Negotiate 
+```
