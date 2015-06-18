@@ -15,8 +15,10 @@ Check required packages are installed:
 Install missing packages:
 ```
 $ cpanm Web::Scraper
+$ cpanm LWP::Protocol::https
 ```
 To use Kerberos authentication just do:
 ```
 $ cpanm LWP::Authen::Negotiate 
 ```
+

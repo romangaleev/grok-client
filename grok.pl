@@ -15,6 +15,8 @@ BEGIN {
 	$ENV{HTTPS_CA_FILE} ||= "gooddata.pem";
 };
 
+sub LOG(@) { print join(" ", @_), "\n" }
+
 my ($term) = @ARGV;
 if(not defined $term) {
 	print "Usage: $0 search_term\n";
@@ -29,8 +31,8 @@ our $search = 'https://opengrok.intgdc.com/source/search';
 my $ua = UA->new;
 my $re = $ua->get( $base );
 
-if ($re->status_line eq '401 Authorization Required') {
-	print "Not Authorized: ", $ENV{USER}, "\n";
+if ($re->code != 200) {
+	LOG "Not Authorized: ", $ENV{USER}, "code:", $re->code;
 	exit;
 }
 
@@ -42,11 +44,17 @@ my $repo = $p->scrape( $re->content );
 
 my @projects = map { sprintf("project=%s", $_) } @{ $repo->{opt} };
 
+LOG "Number of projects:", scalar(@projects);
+
 my $q = sprintf("q=\"%s\"", $term);
 
 my $query = join('&', "n=1024", $q, @projects);
 
 my $result = $ua->get( join('?', $search, $query) );
+
+if ($result->code != 200) {
+	print "Search request failure: ", $result->code;
+}
 
 my $r = scraper {
 	process "#results tr", "tr[]" => scraper {
