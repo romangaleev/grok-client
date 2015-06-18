@@ -1,5 +1,5 @@
-Grok-Client
-===========
+OpenGrok client
+===============
 ```
 Usage: 
 $ ./grok.pl search_term
