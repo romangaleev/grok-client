@@ -32,7 +32,7 @@ my $ua = UA->new;
 my $re = $ua->get( $base );
 
 if ($re->code != 200) {
-	LOG "Not Authorized: ", $ENV{USER}, "code:", $re->code;
+	LOG "Initial page failure: ", $ENV{USER}, "code:", $re->code, $re->status_line;
 	exit;
 }
 
@@ -53,7 +53,7 @@ my $query = join('&', "n=1024", $q, @projects);
 my $result = $ua->get( join('?', $search, $query) );
 
 if ($result->code != 200) {
-	print "Search request failure: ", $result->code;
+	LOG "Search request failure: ", $result->code, $result->status_line;
 }
 
 my $r = scraper {
