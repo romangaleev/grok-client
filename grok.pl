@@ -40,7 +40,7 @@ my $p = scraper {
 	process "#ptbl option", 'opt[]' => '@value';
 };
 
-print $re->content;
+# print $re->content;
 
 my $repo = $p->scrape( $re->content );
 
@@ -58,7 +58,7 @@ if ($result->code != 200) {
 	LOG "Search request failure: ", $result->code, $result->status_line;
 }
 
-print $result->content;
+# print $result->content;
 
 my $r = scraper {
 	process "#results tr", "tr[]" => scraper {
