@@ -40,6 +40,8 @@ my $p = scraper {
 	process "#ptbl option", 'opt[]' => '@value';
 };
 
+print $re->content;
+
 my $repo = $p->scrape( $re->content );
 
 my @projects = map { sprintf("project=%s", $_) } @{ $repo->{opt} };
@@ -55,6 +57,8 @@ my $result = $ua->get( join('?', $search, $query) );
 if ($result->code != 200) {
 	LOG "Search request failure: ", $result->code, $result->status_line;
 }
+
+print $result->content;
 
 my $r = scraper {
 	process "#results tr", "tr[]" => scraper {
