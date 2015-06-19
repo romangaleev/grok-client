@@ -30,3 +30,4 @@ Ubuntu 12.04 contains buggy Net::HTTP package. Here is how to upgrade:
 $ curl -L https://cpanmin.us | perl - App::cpanminus
 $ cpanm Net::HTTP
 ```
+Link to the bug report: https://rt.cpan.org/Public/Bug/Display.html?id=80670
