@@ -6,6 +6,7 @@ $ ./grok.pl search_term
 $ HTTPS_CA_FILE=gooddata.pem ./grok.pl search_term
 $ HTTPS_CA_FILE=gooddata.pem USER=username PASSWORD=password ./grok.pl search_term
 ```
+
 Setup
 =====
 Check required packages are installed:
@@ -22,3 +23,10 @@ To use Kerberos authentication just do:
 $ cpanm LWP::Authen::Negotiate 
 ```
 
+Notes
+=====
+Ubuntu 12.04 contains buggy Net::HTTP package. Here is how to upgrade:
+```
+$ curl -L https://cpanmin.us | perl - App::cpanminus
+$ cpanm Net::HTTP
+```
