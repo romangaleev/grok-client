@@ -1,15 +1,8 @@
 #!/usr/bin/env perl
-package UA;
-use base 'LWP::UserAgent';
-
-sub get_basic_credentials {
-	return $ENV{USER}, $ENV{PASSWORD};
-}
-
-package main;
 use strict;
 use Web::Scraper;
 use JSON;
+use UA;
 
 BEGIN {
 	$ENV{HTTPS_CA_FILE} ||= "gooddata.pem";
@@ -32,6 +25,7 @@ my $ua = UA->new;
 my $re = $ua->get( $base );
 
 if ($re->code != 200) {
+	print $re->header('WWW-Authenticate');
 	LOG "Initial page failure:", $ENV{USER}, "code:", $re->code, $re->status_line;
 	exit;
 }
