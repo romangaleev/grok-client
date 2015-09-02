@@ -22,6 +22,7 @@ To use Kerberos authentication just do:
 ```
 $ cpanm LWP::Authen::Negotiate 
 ```
+Bug: when LWP::Authen::Negotiate is installed basic auth doesn't work.
 
 Notes
 =====

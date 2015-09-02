@@ -3,7 +3,7 @@ package UA;
 use base 'LWP::UserAgent';
 
 sub get_basic_credentials {
-    return $ENV{USER}, $ENV{PASSWORD};
+	return $ENV{USER}, $ENV{PASSWORD};
 }
 
 package main;
@@ -32,14 +32,13 @@ my $ua = UA->new;
 my $re = $ua->get( $base );
 
 if ($re->code != 200) {
-	LOG "Initial page failure: ", $ENV{USER}, "code:", $re->code, $re->status_line;
+	LOG "Initial page failure:", $ENV{USER}, "code:", $re->code, $re->status_line;
 	exit;
 }
 
 my $p = scraper {
 	process "#ptbl option", 'opt[]' => '@value';
 };
-
 
 my $repo = $p->scrape( $re->content );
 
