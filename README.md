@@ -31,3 +31,8 @@ $ curl -L https://cpanmin.us | perl - App::cpanminus
 $ cpanm Net::HTTP
 ```
 Link to the bug report: https://rt.cpan.org/Public/Bug/Display.html?id=80670
+
+UA.pm contains patched version of LWP::UserAgent->request() method to allow
+fallback to basic auth scheme if negotiation fails.
+
+Link to the pull request: https://github.com/libwww-perl/libwww-perl/pull/78
